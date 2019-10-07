@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Form from './components/Form';
+import People from './components/People'
+import NewPerson from './components/NewPeople'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = (props) => {
+   const [people, setPeople] = useState([
+      {
+         f_name: 'Pham',
+         l_name: 'Hung'
+      }
+   ]);
+
+   const addPerson = (person) => {
+      setPeople([...people, person]);
+   }
+
+   return (
+      <div className="container">
+         <div className="row">
+            <Form addPerson={addPerson} />
+
+            <People people={people} />
+
+            <NewPerson newPerson={people[people.length - 1]} peopleCount={people.length} />
+         </div>
+      </div>
+   );
 }
 
 export default App;
